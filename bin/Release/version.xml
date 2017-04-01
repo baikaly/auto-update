@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoUpdater>
+  <Updater>
+    <UpdateUrl>ftp://10.192.2.209/ProQual/</UpdateUrl>
+    <MainVersion>1.1.2.0</MainVersion>
+    <LastUpdateTime>2014-01-27</LastUpdateTime>
+    <UpdateDescription>自动更新程序</UpdateDescription>
+  </Updater>
+  <UpdateFileList>
+    <UpdateFile Version="2.3.4.0" Name="ProQual.exe" />
+  </UpdateFileList>
+</AutoUpdater>
