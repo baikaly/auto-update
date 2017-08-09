@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AutoUpdater>
   <Updater>
-  	<StartingName>BarcodePrinter.exe</StartingName>>
-    <UpdateUrl>ftp://10.192.2.105/app_upgrade/BarcodePrinter/</UpdateUrl>
-    <MainVersion>3.0.0</MainVersion>
-    <LastUpdateTime>2014-01-27</LastUpdateTime>
+  	<StartingName>QSB.exe</StartingName>>
+    <UpdateUrl>ftp://10.192.2.105/app_upgrade/QSB/</UpdateUrl>
+    <MainVersion>0.2.5</MainVersion>
+    <LastUpdateTime>2017-07-04</LastUpdateTime>
     <UpdateDescription>自动更新程序</UpdateDescription>
   </Updater>
   <UpdateFileList>
-    <UpdateFile Version="3.0.0" Name="BarcodePrinter.exe" />
-    <UpdateFile Version="3.0.0" Name="PrinterConfig.xml" />
+    <UpdateFile Version="0.2.5" Name="QSB.exe" />
+    <UpdateFile Version="0.2.5" Name="QSBConfig.xml" />
   </UpdateFileList>
 </AutoUpdater>

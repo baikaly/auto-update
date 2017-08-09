@@ -47,3 +47,13 @@ E:\Project\Updater\bin\Debug\Updater.xml
 E:\Project\Updater\obj\x86\Debug\Updater.Resources.resources
 E:\Project\Updater\obj\x86\Debug\Updater.UpdatingForm.resources
 E:\Project\Updater\obj\x86\Debug\Updater.vbproj.GenerateResource.Cache
+E:\Project\auto-update\bin\Debug\Updater.exe
+E:\Project\auto-update\bin\Debug\Updater.pdb
+E:\Project\auto-update\bin\Debug\Updater.xml
+E:\Project\auto-update\obj\x86\Debug\Updater.vbprojResolveAssemblyReference.cache
+E:\Project\auto-update\obj\x86\Debug\Updater.Resources.resources
+E:\Project\auto-update\obj\x86\Debug\Updater.UpdatingForm.resources
+E:\Project\auto-update\obj\x86\Debug\Updater.vbproj.GenerateResource.Cache
+E:\Project\auto-update\obj\x86\Debug\Updater.exe
+E:\Project\auto-update\obj\x86\Debug\Updater.xml
+E:\Project\auto-update\obj\x86\Debug\Updater.pdb
