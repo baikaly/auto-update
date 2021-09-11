@@ -8,7 +8,7 @@
     ' StartupNextInstance: 在启动单实例应用程序且应用程序已处于活动状态时引发。
     ' NetworkAvailabilityChanged: 在连接或断开网络连接时引发。
     Partial Friend Class MyApplication
-
+'Download by http://www.codesc.net
         Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
             MsgBox("程序发生未处理错误。错误信息： " & e.Exception.Message, vbCritical, "错误")
         End Sub

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AutoUpdater>
+  <Updater>
+    <StartingName>YNJC_TempSensor.exe</StartingName>>
+    <UpdateUrl>ftp://43.226.149.108/Data/app_upgrade/YNJC_TempSensor/</UpdateUrl>
+    <Username>ftp6319254</Username>
+    <Password>ABCDefg123</Password>
+    <MainVersion>1.0.0.1</MainVersion>
+    <LastUpdateTime>2019-09-01</LastUpdateTime>
+    <UpdateDescription>1.增加了自动更新功能\n  2.修复了一些bug
+    </UpdateDescription>
+  </Updater>
+  <UpdateFileList>
+    <UpdateFile Version="1.0.0.1" Name="YNJC_TempSensor.exe" />
+    <UpdateFile Version="1.0.0.1" Name="Config.xml" />
+    <UpdateFile Version="1.0.0.1" Name="x86/text.txt" />
+    <UpdateFile Version="1.0.0.1" Name="test/IP修改.bat" />
+  </UpdateFileList>
+</AutoUpdater>

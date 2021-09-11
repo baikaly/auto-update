@@ -1,12 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <AutoUpdater>
   <Updater>
-    <UpdateUrl>ftp://10.192.2.209/ProQual/</UpdateUrl>
-    <MainVersion>1.1.2.0</MainVersion>
-    <LastUpdateTime>2014-01-27</LastUpdateTime>
-    <UpdateDescription>自动更新程序</UpdateDescription>
+    <StartingName>Updater.exe</StartingName>
+    <UpdateUrl>ftp://43.226.149.108/Data/app_upgrade/Updater/</UpdateUrl>
+    <MainVersion>1.0.1.0</MainVersion>
+    <LastUpdateTime>2019-09-10</LastUpdateTime>
+    <UpdateDescription>
+    </UpdateDescription>
   </Updater>
   <UpdateFileList>
-    <UpdateFile Version="2.3.4.0" Name="ProQual.exe" />
+    <UpdateFile Version="1.0.1.0" Name="Updater.pdb" />
+    <UpdateFile Version="1.0.1.0" Name="Updater.vshost.exe" />
+    <UpdateFile Version="1.0.1.0" Name="Updater.xml" />
   </UpdateFileList>
 </AutoUpdater>

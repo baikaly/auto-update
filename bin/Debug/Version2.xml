@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AutoUpdater>
+  <Updater>
+    <StartingName>RFToolApp.exe</StartingName>
+    <UpdateUrl>ftp://106.54.128.169/Data/app_upgrade/RFToolApp/</UpdateUrl>
+    <MainVersion>1.1.2.5</MainVersion>
+    <LastUpdateTime>2019-09-24</LastUpdateTime>
+    <DeleteLocalFile>False</DeleteLocalFile>
+    <UpdateDescription>快捷按键不再默认可以拖动，否则有时点击串口命令时手抖会导致命令发不出去。若要启用快件按钮拖动，可以到设置界面勾选</UpdateDescription>
+  </Updater>
+  <UpdateFileList>
+    <UpdateFile Version="0.0.0.0" Name="FWServer.exe" />
+    <UpdateFile Version="0.0.0.0" Name="FWServer_gf.exe" />
+    <UpdateFile Version="20190715.074436" Name="IQ2010Console.exe" />
+    <UpdateFile Version="0.0.0.0" Name="LitePointConnectivityServer.exe" />
+    <UpdateFile Version="1.1.2.5" Name="RFToolApp.exe" />
+    <UpdateFile Version="0.0.0.0" Name="StartLitePointConnectivityServer.exe" />
+    <UpdateFile Version="0.0.0.0" Name="StopLitePointConnectivity_FW_Server.exe" />
+    <UpdateFile Version="1.1.2.5" Name="Version.xml" />
+  </UpdateFileList>
+</AutoUpdater>

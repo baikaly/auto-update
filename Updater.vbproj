@@ -64,7 +64,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>pic.ico</ApplicationIcon>
+    <ApplicationIcon>download_128px_1175563_easyicon.net.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="arrrow_128px_1199373_easyicon.net.ico" />
+    <Content Include="download_128px_1175563_easyicon.net.ico" />
     <Content Include="pic.ico" />
   </ItemGroup>
   <ItemGroup>

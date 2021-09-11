@@ -1,0 +1,14 @@
+1. Ë½ÓÐFTP  
+    url =  ftp://43.226.149.108/Data/app_upgrade/YNJC_TempSensor
+    Private Server_Username As String = "ftp6319254"
+    Private Server_Password As String = "ABCDefg123"
+
+2. Íâ¿ªFTP
+    url =  ftp://43.226.149.114/Data/app_upgrade/YNJC_TempSensor
+    Private Server_Username As String = "ftp6321126"
+    Private Server_Password As String = "6bs9QJL1x91NOAR7BBSFDY20"
+
+
+useradd -m -d /home/ftp6321126 -s /sbin/nologin ftp6321126
+passwd ftp6321126
+6bs9QJL1x91NOAR7BBSFDY20

@@ -1,6 +1,6 @@
 Imports System.IO
 Imports System.Net
-
+'Download by http://www.codesc.net
 Public Class UpdatingForm
 
     Private LocalVersionConfig As XmlVersionConfigFile = Nothing
@@ -9,12 +9,14 @@ Public Class UpdatingForm
     Private WithEvents webClient As New System.Net.WebClient
 
     Private _downloadIndex As Integer
-    Private _localConfigFileName As String = "version.xml"
+    Private _localConfigFileName As String = "Version.xml"
     Private _localXmlFilePath As String = Path.Combine(Application.StartupPath, _localConfigFileName)
     Private _updateUrl As String = String.Empty
     Private _deleteFileList As New List(Of String)
-
+    Private DeleteLocal As Boolean = False
     Private _startingName As String = String.Empty
+    Private Server_Username As String
+    Private Server_Password As String
 
 
 
@@ -51,22 +53,31 @@ Public Class UpdatingForm
 
             lvwFile.Items(_downloadIndex).ImageIndex = 1
 
-            Try
-                Dim destPath As String = IO.Path.Combine(Application.StartupPath, lvwFile.Items(_downloadIndex).SubItems(1).Text)
-                File.Delete(destPath)
-                webClient.Credentials = New System.Net.NetworkCredential("liugp", "654321")
-                Debug.WriteLine(_updateUrl & lvwFile.Items(_downloadIndex).SubItems(1).Text)
-                webClient.DownloadFileAsync(New Uri(_updateUrl & lvwFile.Items(_downloadIndex).SubItems(1).Text), destPath)
+            'Try
+            Dim RelativeFilePath = lvwFile.Items(_downloadIndex).SubItems(1).Text
+            Dim destPath As String = IO.Path.Combine(Application.StartupPath, RelativeFilePath)
+            Dim s = Math.Max(InStrRev(RelativeFilePath, "/"), InStrRev(RelativeFilePath, "\"))
 
-            Catch ex As Exception
-                Me.lvwFile.Items(_downloadIndex).ImageIndex = 3
-                MsgBox("下载文件发生错误，更新失败。错误原因： " & ex.Message, MsgBoxStyle.Critical, "错误")
-                Me.Close()
-            End Try
+            If s > 0 Then
+                Dim Filename = RelativeFilePath.Substring(s)
+                Dim FolderPath = destPath.Replace(Filename, "")
+                Debug.Print("Filename=" & Filename & ", FolderPath=" & FolderPath)
+                If Not Directory.Exists(FolderPath) Then
+                    Directory.CreateDirectory(FolderPath)
+                End If
+            End If
+            File.Delete(destPath)
+            webClient.Credentials = New System.Net.NetworkCredential(Server_Username, Server_Password)
+            Debug.WriteLine(_updateUrl & lvwFile.Items(_downloadIndex).SubItems(1).Text)
+            webClient.DownloadFileAsync(New Uri(_updateUrl & lvwFile.Items(_downloadIndex).SubItems(1).Text), destPath)
+
+            'Catch ex As Exception
+            '    Me.lvwFile.Items(_downloadIndex).ImageIndex = 3
+            '    MsgBox("下载文件发生错误，更新失败。错误原因： " & ex.Message, MsgBoxStyle.Critical, "错误")
+            '    Me.Close()
+            'End Try
         Else
             UpdateFileCompleted()
-
-
         End If
     End Sub
 
@@ -79,7 +90,7 @@ Public Class UpdatingForm
         ' 删除不需要的文件。
         For Each f As String In _deleteFileList
             Try
-                File.Delete(Path.Combine(Application.StartupPath, f))
+                If DeleteLocal Then File.Delete(Path.Combine(Application.StartupPath, f))
             Catch ex As Exception
                 '
             End Try
@@ -107,7 +118,7 @@ Public Class UpdatingForm
             End If
         Next
 
-        ' 查找服务器端新增需要下载的文件。
+        ' 查找服务器端新增的文件。
         For Each p As KeyValuePair(Of String, Version) In Me.ServerVersionConfig.UpdateFileList
             If Me.LocalVersionConfig.UpdateFileList.ContainsKey(p.Key) = False Then
                 Dim item As ListViewItem = Me.lvwFile.Items.Add(String.Empty, 0)
@@ -119,7 +130,7 @@ Public Class UpdatingForm
 
         ' 版本控制文件为必须下载文件。
         Dim itemVersion As ListViewItem = Me.lvwFile.Items.Add(String.Empty, 0)
-        itemVersion.SubItems.Add("version.xml")
+        itemVersion.SubItems.Add("Version.xml")
         itemVersion.SubItems.Add(Me.ServerVersionConfig.MainVersion.ToString)
         itemVersion.SubItems.Add(String.Empty)
 
@@ -127,38 +138,71 @@ Public Class UpdatingForm
         _downloadIndex = -1
     End Sub
 
-    Private Sub UpdatingForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Dim localXmlFileContent As String = File.ReadAllText(_localXmlFilePath)
-        LocalVersionConfig = New XmlVersionConfigFile(localXmlFileContent)
+    Private Sub UpdatingForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
+        Try
+            Dim localXmlFileContent As String = File.ReadAllText(_localXmlFilePath)
+            LocalVersionConfig = New XmlVersionConfigFile(localXmlFileContent)
+        Catch ex As Exception
+            GoTo Finish
+        End Try
+
         _updateUrl = Path.Combine(LocalVersionConfig.UpdateUrl, _localConfigFileName)
         _startingName = LocalVersionConfig.StartingName
-
+        If _updateUrl.Contains("106.54.128.169") Or _updateUrl.Contains("43.226.149.114") Then
+            Server_Username = "ftp6321126"
+            Server_Password = "6bs9QJL1x91NOAR7BBSFDY20"
+        ElseIf _updateUrl.Contains("43.226.149.108") Then
+            Server_Username = "ftp6319254"
+            Server_Password = "ABCDefg123"
+        End If
+        If Not LocalVersionConfig.Username = String.Empty Then Server_Username = LocalVersionConfig.Username
+        If Not LocalVersionConfig.Password = String.Empty Then Server_Password = LocalVersionConfig.Password
+        DeleteLocal = LocalVersionConfig.DeleteLocalFile
         Dim serverXmlFileContent As String = String.Empty
         Dim client As New WebClient
-        client.Credentials = New System.Net.NetworkCredential("liugp", "654321")
+        client.Credentials = New System.Net.NetworkCredential(Server_Username, Server_Password)
         Try
             serverXmlFileContent = client.DownloadString(New Uri(_updateUrl))
         Catch ex As Exception
-            MsgBox("无法从服务器获取版本控制信息。错误原因： " & ex.Message, vbCritical, "错误")
-
+            'MsgBox("无法从服务器获取版本控制信息。错误原因： " & ex.Message, vbCritical, "错误")
+            Debug.Print(ex.Message)
+            Debug.Print("无法从服务器获取版本控制信息")
         End Try
         ServerVersionConfig = New XmlVersionConfigFile(serverXmlFileContent)
         If LocalVersionConfig.MainVersion < ServerVersionConfig.MainVersion Then
-            LoadUpdateFile()
-            '''强制结束进程
-            'Dim proc() As Process
-            'proc = Process.GetProcessesByName("ProQual")
-            'For Each p In proc
-            '    p.Kill()
-            'Next
-            'proc = Nothing
-            DownloadNextFile()
+            Dim boxresult = MessageBox.Show("发现有新的版本" & ServerVersionConfig.MainVersion.ToString & "，是否立即更新?" & vbCrLf & "新版本描述:" & vbCrLf & "  " & ServerVersionConfig.UpdateDescription.Replace("\n", vbCrLf), "更新提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly)
+
+            If boxresult = vbNo Then
+                GoTo Finish
+            Else
+                LoadUpdateFile()
+                '强制结束进程
+                Dim proc() As Process
+                proc = Process.GetProcessesByName(_startingName.Replace(".exe", ""))
+                For Each p In proc
+                    p.Kill()
+                Next
+                proc = Nothing
+                System.Threading.Thread.Sleep(1000)
+                DownloadNextFile()
+            End If
         Else
-            Process.Start(Path.Combine(Application.StartupPath, _startingName))
-            Me.Close()
+            'Process.Start(Path.Combine(Application.StartupPath, _startingName))
+            GoTo Finish
+
         End If
 
+
+Finish:
+        Try
+            'End
+            'Application.Exit()
+            Me.Close()
+        Catch ex As Exception
+
+        End Try
     End Sub
 
 End Class
